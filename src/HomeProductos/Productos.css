@@ -1,0 +1,123 @@
+.Fondo {
+    background-color: #141C29;
+    padding: 190px;
+  }
+  
+  .container-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 22px;
+  }
+  
+  .item {
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .item figure {
+    margin: 0;
+  }
+  
+  .item figure img {
+    width: 350px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+  }
+  
+  .info-product {
+    padding: 15px;
+    background: #2D4263;
+    text-align: center;
+    
+  }
+  .info-product:hover{
+    padding: 20px;
+    background: #11294D;
+    text-align: center;
+  }
+  
+  .info-product h2 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: white;
+  }
+  
+  .info-product .price {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .info-product button {
+    background-color: #263143;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .info-product button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .container-items {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  
+    .info-product h2 {
+      font-size: 1rem;
+    }
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.cart-container {
+  display: flex;
+  align-items: center;
+}
+
+.cart-link {
+  position: relative;
+}
+
+.carrito {
+  width: 30px;
+  height: 30px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+  
