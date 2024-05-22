@@ -15,12 +15,12 @@
     font-size: 24px;
     font-weight: bold;
     margin: 0;
-    padding-right: 50px; /* Padding to create space for the cart icon */
+    padding-right: 50px; 
   }
   
   .shopping-cart-icon-container {
     position: absolute;
-    right: calc(50% - 70px); /* Adjust this value based on the width of the icon and title */
+    right: calc(50% - 70px); 
     display: flex;
     align-items: center;
   }

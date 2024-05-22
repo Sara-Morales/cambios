@@ -16,6 +16,16 @@ function App() {
   const [countProducts, setCountProducts] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const updateCartItem = (updatedItem) => {
+    setAllProducts(allProducts.map(item => 
+      item.id === updatedItem.id ? updatedItem : item
+    ));
+  };
+
+  const removeCartItem = (itemId) => {
+    setAllProducts(allProducts.filter(item => item.id !== itemId));
+  };
+
   return (
     <Router>
       <div>
@@ -56,7 +66,11 @@ function App() {
           />
           <Route 
             path="/cart" 
-            element={<Cart cartItems={allProducts} />} 
+            element={<Cart 
+              cartItems={allProducts} 
+              updateCartItem={updateCartItem} 
+              removeCartItem={removeCartItem} 
+            />} 
           />
         </Routes>
       </div>
