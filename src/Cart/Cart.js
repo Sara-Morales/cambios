@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
   const [selectedItems, setSelectedItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const allItemIds = cartItems.map(item => item.id);
@@ -47,12 +49,11 @@ const Cart = ({ cartItems, updateCartItem, removeCartItem }) => {
   };
 
   const handleBuy = () => {
-    console.log("Productos seleccionados para comprar:", selectedItems);
-    console.log("Total a pagar:", formatPrice(calculateTotal(cartItems)));
+    navigate('/checkout');
   };
 
   return (
-    <div className="cart-container"> 
+    <div className="cart-container">
       <div className="cart-products">
         <ul>
           {cartItems.map((item) => (

@@ -1,0 +1,152 @@
+.checkout-container {
+    background-color: #1e2a38;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 600px;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkout-container h1 {
+    margin-bottom: 20px;
+    font-family: "Oswald", sans-serif;
+}
+
+.address-city-section,
+.housing-phone-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.address-section,
+.city-section,
+.housing-type-section,
+.phone-section {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.city-section,
+.phone-section {
+    margin-right: 0;
+}
+
+.address-section label,
+.city-section label,
+.housing-type-section label,
+.phone-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.address-section input,
+.city-section input,
+.housing-type-section select,
+.phone-section input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #263143;
+    color: #e0e0e0;
+}
+
+.summary-section {
+    width: 100%;
+}
+
+.summary-section h2 {
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #031f50;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+    text-align: center;
+}
+
+.summary-items {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0, 149, 255) #1e2a38;
+}
+
+.summary-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.summary-items::-webkit-scrollbar-track {
+    background: #1e2a38;
+}
+
+.summary-items::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 149, 255);
+    border-radius: 20px;
+    border: 3px solid #1e2a38;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2d4263;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.summary-item span {
+    flex: 1;
+    text-align: center;
+}
+
+.summary-item-product {
+    text-align: left;
+    flex: 3;
+}
+
+.summary-item-quantity,
+.summary-item-price {
+    flex: 1;
+}
+
+button {
+    background-color: rgb(0, 149, 255);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #162ea8;
+}
+
+.total-payment {
+    font-family: "Oswald", sans-serif;
+}
+.error {
+    border-color: red;
+  }
+  
+  .error-message {
+    color: rgb(186, 99, 99);
+    margin-top: 5px;
+  }
+  
