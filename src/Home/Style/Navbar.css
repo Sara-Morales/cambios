@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
+
 .title {
   font-family: "Oswald", sans-serif;
   font-size: 10.5em;
@@ -11,11 +12,12 @@
   align-items: center;
 }
 
-.nav-link {
+.nav-link{
   margin-right: 20px;
   font-family: "Oswald", sans-serif;
   font-size: 1em;
   text-decoration: none;
+  color: #ffffff;
 }
 
 .nav-link:hover {

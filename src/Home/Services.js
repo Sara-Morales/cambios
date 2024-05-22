@@ -5,8 +5,8 @@ import reversa from "../img/reversa.png";
 const Services = () => {
   return (
     <section id="services" className="services text-center py-5">
-    <h2 className="text-white mb-4">Servicios</h2>
-    <div className="container">     
+      <h2 className="text-white mb-4">Servicios</h2>
+      <div className="container">
         <div className="card">
           <div className="card-inner">
             <div className="card-front">
