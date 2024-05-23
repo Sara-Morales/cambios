@@ -119,5 +119,27 @@
   font-size: 12px;
   font-weight: bold;
 }
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: -150px;
+}
+
+.category-buttons button {
+  background-color: #263143;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-buttons button:hover {
+  background-color: #0056b3;
+}
+
 
   

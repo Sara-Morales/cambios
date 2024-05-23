@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import data from './data';
 import './Productos.css';
 
@@ -10,6 +10,8 @@ const ProductList = ({
   total,
   setTotal,
 }) => {
+  const [selectedCategory, setSelectedCategory] = useState('todos');
+
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-CO', {
       minimumFractionDigits: 0,
@@ -35,13 +37,27 @@ const ProductList = ({
     }
   };
 
+  const filterProducts = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts = selectedCategory === 'todos' ?
+    data :
+    data.filter(product => product.category === selectedCategory);
+
   return (
     <div className="Fondo">
+      <div className="category-buttons">
+        <button onClick={() => filterProducts('todos')}>Todos</button>
+        <button onClick={() => filterProducts('consolas')}>Consolas</button>
+        <button onClick={() => filterProducts('videojuegos')}>Videojuegos</button>
+        <button onClick={() => filterProducts('accesorios')}>Accesorios</button>
+      </div>
       <div className="container-items">
-        {data.map((product) => (
+        {filteredProducts.map((product) => (
           <div className="item" key={product.id}>
             <figure>
-              <img src={product.img} alt={product.nameProduct} />
+              <img src={product.img} alt={product.nameProduct} /> {/* Asegúrate de que img esté definido correctamente en tu objeto de producto */}
             </figure>
             <div className="info-product">
               <h2>{product.nameProduct}</h2>

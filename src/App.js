@@ -11,6 +11,7 @@ import Signup from './Cuenta_usuario/Signup/Signup';
 import ProductList from './HomeProductos/Productos';
 import Cart from './Cart/Cart';
 import Checkout from './Checkout/Checkout';
+import AdminPanel from './Admin/AdminPanel'; // Importar AdminPanel
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -87,6 +88,10 @@ function App() {
           <Route 
             path="/checkout" 
             element={<Checkout cartItems={allProducts} />} 
+          />
+          <Route
+            path="/admin"
+            element={<AdminPanel products={allProducts} setProducts={setAllProducts} />}
           />
         </Routes>
       </div>

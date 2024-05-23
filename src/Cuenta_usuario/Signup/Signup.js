@@ -45,6 +45,29 @@ function Signup() {
     }
   };
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const { email, password } = values;
+  
+    // Verificar si las credenciales son del administrador
+    if (email === "admin@example.com" && password === "admin123") {
+      // Redirigir al área de administrador
+      navigate("/admin");
+    } else {
+      // Lógica para el inicio de sesión de usuarios normales
+      axios
+        .post("http://localhost:8081/login", { email, password })
+        .then((res) => {
+          navigate("/shopping");
+        })
+        .catch((err) => {
+          console.log(err);
+          setErrors({ login: "Credenciales inválidas" });
+        });
+    }
+  };
+  
+
   const iniciarSesion = () => {
     if (window.innerWidth > 850) {
       setFormularioLoginVisible(true);
@@ -143,6 +166,7 @@ function Signup() {
           <form
             className="formulario__login"
             style={{ display: formularioLoginVisible ? "block" : "none" }}
+            onSubmit={handleLogin}
           >
             <h2>Iniciar Sesión</h2>
             <input
@@ -163,7 +187,8 @@ function Signup() {
               className="controls"
             />
             {errors.password && <span className="text-danger">{errors.password}</span>}
-            <button className="login-button" onClick={() => navigate("/shopping")}>
+            {errors.login && <span className="text-danger">{errors.login}</span>}
+            <button type="submit" className="login-button">
               Entrar
             </button>
           </form>
@@ -252,7 +277,9 @@ function Signup() {
               />
             </div>
             {errors.password && <span className="text-danger">{errors.password}</span>}
-            {errors.confirmarPassword && <span className="text-danger">{errors.confirmarPassword}</span>}
+            {errors.confirmarPassword && (
+              <span className="text-danger">{errors.confirmarPassword}</span>
+            )}
             <button type="submit" className="login-button">
               Registrarme
             </button>

@@ -1,0 +1,101 @@
+/* AdminPanel.css */
+
+/* Fondo oscuro */
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.admin-panel {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #333; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.panel-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.add-new-btn {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-buttons button {
+  margin: 0 5px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-list {
+  border: 1px solid #444; /* Borde más oscuro */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr auto auto; /* Columnas ajustadas */
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #444; /* Borde más oscuro */
+}
+
+.product-row:hover {
+  background-color: #444; /* Fondo más oscuro al pasar el mouse */
+}
+
+.product-row div {
+  text-align: center;
+}
+
+.product-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #007bff; /* Azul */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
