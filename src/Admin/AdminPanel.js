@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import './AdminPanel.css';
-import { FaEdit, FaTrash, FaUpload } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import data from '../HomeProductos/data'; // Importar los datos de productos
 
 const AdminPanel = () => {
@@ -38,14 +38,14 @@ const AdminPanel = () => {
     setNewProduct({ ...newProduct, [name]: value });
   };
 
-  const handleAddProduct = () => {
-    if (!newProduct.nameProduct || !newProduct.price || !newProduct.img || !newProduct.category || !newProduct.status || !newProduct.stock) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
-    setProducts([...products, { ...newProduct, id: Date.now() }]);
-    setNewProduct({ id: '', nameProduct: '', price: '', img: '', category: '', status: '', stock: '' });
-  };
+  // const handleAddProduct = () => {
+  //   if (!newProduct.nameProduct || !newProduct.price || !newProduct.img || !newProduct.category || !newProduct.status || !newProduct.stock) {
+  //     alert('Por favor, completa todos los campos.');
+  //     return;
+  //   }
+  //   setProducts([...products, { ...newProduct, id: Date.now() }]);
+  //   setNewProduct({ id: '', nameProduct: '', price: '', img: '', category: '', status: '', stock: '' });
+  // };
 
   return (
     <div className="admin-panel">
