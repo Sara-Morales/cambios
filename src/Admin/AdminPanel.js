@@ -1,5 +1,3 @@
-// AdminPanel.js
-
 import React, { useState } from 'react';
 import './AdminPanel.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -8,23 +6,29 @@ import data from '../HomeProductos/data'; // Importar los datos de productos
 const AdminPanel = () => {
   const [products, setProducts] = useState(data);
   const [editedProduct, setEditedProduct] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
   const [newProduct, setNewProduct] = useState({
     id: '',
     nameProduct: '',
     price: '',
     img: '',
     category: '',
-    status: '',
     stock: ''
   });
 
+  const [idCounter, setIdCounter] = useState(1); // Contador de ID
+
   const handleEdit = (product) => {
-    setEditedProduct(product);
+    setEditedProduct({ ...product });
   };
 
   const handleSave = () => {
-    setProducts(products.map((p) => (p.id === editedProduct.id ? editedProduct : p)));
-    setEditedProduct(null);
+    if (validateProduct(editedProduct)) {
+      setProducts(products.map((p) => (p.id === editedProduct.id ? editedProduct : p)));
+      setEditedProduct(null);
+    } else {
+      alert('Por favor, completa todos los campos correctamente.');
+    }
   };
 
   const handleDelete = (id) => {
@@ -33,62 +37,156 @@ const AdminPanel = () => {
     }
   };
 
-  const handleNewProductChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
+  const handleAddProduct = () => {
+    if (validateProduct(newProduct)) {
+      const newId = idCounter; // Asignar el valor actual del contador como ID
+      setProducts([...products, { ...newProduct, id: newId }]);
+      setIdCounter(idCounter + 1); // Incrementar el contador
+      setShowAddForm(false);
+      setNewProduct({
+        id: '',
+        nameProduct: '',
+        price: '',
+        img: '',
+        category: '',
+        stock: ''
+      });
+    } else {
+      alert('Por favor, completa todos los campos correctamente.');
+    }
   };
 
-  // const handleAddProduct = () => {
-  //   if (!newProduct.nameProduct || !newProduct.price || !newProduct.img || !newProduct.category || !newProduct.status || !newProduct.stock) {
-  //     alert('Por favor, completa todos los campos.');
-  //     return;
-  //   }
-  //   setProducts([...products, { ...newProduct, id: Date.now() }]);
-  //   setNewProduct({ id: '', nameProduct: '', price: '', img: '', category: '', status: '', stock: '' });
-  // };
+  const handleProductChange = (e, key) => {
+    const { value } = e.target;
+    setEditedProduct({ ...editedProduct, [key]: value });
+  };
+
+  const handleNewProductChange = (e) => {
+    const { name, value, type, files } = e.target;
+    if (type === "file") {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewProduct({ ...newProduct, img: reader.result });
+      };
+      reader.readAsDataURL(files[0]);
+    } else {
+      setNewProduct({ ...newProduct, [name]: value });
+    }
+  };
+
+  const validateProduct = (product) => {
+    const { nameProduct, price, category, stock } = product;
+    return (
+      nameProduct.trim() !== '' &&
+      category.trim() !== '' &&
+      price !== '' &&
+      !isNaN(price) &&
+      stock !== '' &&
+      !isNaN(stock)
+    );
+  };
 
   return (
     <div className="admin-panel">
       <h2 className="panel-title">Panel de Administración</h2>
-      <button className="add-new-btn" onClick={() => setEditedProduct(newProduct)}>Nuevo Producto</button>
+      <button className="add-new-btn" onClick={() => setShowAddForm(true)}>Agregar Producto</button>
+      {showAddForm && (
+        <div className="product-row">
+        <input type="text" name="nameProduct" value={newProduct.nameProduct} onChange={handleNewProductChange} placeholder="Nombre del producto" className="dark-input" />
+        <input type="text" name="category" value={newProduct.category} onChange={handleNewProductChange} placeholder="Categoría" className="dark-input" />
+        <input type="number" name="price" value={newProduct.price} onChange={handleNewProductChange} placeholder="Precio" className="dark-input" />
+        <input type="number" name="stock" value={newProduct.stock} onChange={handleNewProductChange} placeholder="Unidades de stock" className="dark-input" />
+        <input type="file" name="img" onChange={handleNewProductChange} className="dark-input" />
+        <div className="add-buttons-container">
+          <button onClick={handleAddProduct} className="add-product-button">Añadir</button>
+          <button onClick={() => setShowAddForm(false)} className="cancel-add-button">Cancelar</button>
+        </div>
+      </div>
+      
+      )}
       <div className="product-list">
         <div className="product-row header-row">
-          <div>Código</div>
+          <div>ID</div>
           <div>Imagen</div>
           <div>Nombre Producto</div>
           <div>Categoría</div>
-          <div>Estado</div>
           <div>Precio</div>
           <div>Unidades</div>
           <div>Acciones</div>
         </div>
-        {products.map((product) => (
-          <div key={product.id} className="product-row">
-            <div>{product.id}</div>
-            <div><img src={product.img} alt={product.nameProduct} className="product-img" /></div>
-            <div>{product.nameProduct}</div>
-            <div>{product.category}</div>
-            <div>{product.status}</div>
-            <div>${product.price}</div>
-            <div>{product.stock}</div>
+        {products.map((product, index) => (
+          <div key={product.id || index} className="product-row">
+            <div>{index + 1}</div>
+            <div>
+              <img src={product.img} alt={product.nameProduct} className="product-img" />
+            </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="text"
+                  value={editedProduct.nameProduct}
+                  onChange={(e) => handleProductChange(e, 'nameProduct')}
+                  className="dark-input"
+                />
+              ) : (
+                product.nameProduct
+              )}
+            </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="text"
+                  value={editedProduct.category}
+                  onChange={(e) => handleProductChange(e, 'category')}
+                  className="dark-input"
+                />
+              ) : (
+                product.category
+              )}
+            </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="number"
+                  value={editedProduct.price}
+                  onChange={(e) => handleProductChange(e, 'price')}
+                  className="dark-input"
+                />
+              ) : (
+                `$${product.price}`
+              )}
+            </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="number"
+                  value={editedProduct.stock}
+                  onChange={(e) => handleProductChange(e, 'stock')}
+                  className="dark-input"
+                />
+              ) : (
+                product.stock
+              )}
+            </div>
             <div className="actions">
-              <button className="action-btn" onClick={() => handleEdit(product)}><FaEdit /></button>
-              <button className="action-btn" onClick={() => handleDelete(product.id)}><FaTrash /></button>
+              {editedProduct && editedProduct.id === product.id ? (
+                <button className="action-btn" onClick={handleSave}>
+                  Guardar
+                </button>
+              ) : (
+                <>
+                  <button className="action-btn" onClick={() => handleEdit(product)}>
+                    <FaEdit />
+                  </button>
+                  <button className="action-btn" onClick={() => handleDelete(product.id)}>
+                    <FaTrash />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         ))}
       </div>
-      {editedProduct && (
-        <div className="edit-product-form">
-          <h3>Editar Producto</h3>
-          <input type="text" name="nameProduct" value={editedProduct.nameProduct} onChange={handleNewProductChange} placeholder="Nombre del producto" />
-          <input type="text" name="category" value={editedProduct.category} onChange={handleNewProductChange} placeholder="Categoría" />
-          <input type="text" name="status" value={editedProduct.status} onChange={handleNewProductChange} placeholder="Estado" />
-          <input type="number" name="price" value={editedProduct.price} onChange={handleNewProductChange} placeholder="Precio" />
-          <input type="number" name="stock" value={editedProduct.stock} onChange={handleNewProductChange} placeholder="Unidades de stock" />
-          <button onClick={handleSave} className="save-btn">Guardar</button>
-        </div>
-      )}
     </div>
   );
 };

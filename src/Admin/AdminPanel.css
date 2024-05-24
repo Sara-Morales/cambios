@@ -1,68 +1,52 @@
-/* AdminPanel.css */
-
-/* Fondo oscuro */
 body {
-  background-color: #1a1a1a;
+  background-color: #c0c0c0;
   color: #fff;
 }
 
 .admin-panel {
   width: 80%;
   margin: 0 auto;
-  background-color: #333; /* Fondo oscuro */
-  color: #fff; /* Texto blanco */
+  background-color: #333;
+  color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .panel-title {
-  font-size: 24px;
+  font-size: 29px;
   margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
 }
 
 .add-new-btn {
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #007bff; /* Azul */
+  background-color: #195ecc;
   color: #fff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.category-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.category-buttons button {
-  margin: 0 5px;
-  padding: 10px 20px;
-  background-color: #007bff; /* Azul */
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  border-radius: 50px; 
   cursor: pointer;
 }
 
 .product-list {
-  border: 1px solid #444; /* Borde más oscuro */
+  border: 1px solid #444;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .product-row {
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr auto auto; /* Columnas ajustadas */
+  grid-template-columns: auto 0.8fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #444; /* Borde más oscuro */
+  border-bottom: 1px solid #444;
 }
 
 .product-row:hover {
-  background-color: #444; /* Fondo más oscuro al pasar el mouse */
+  background-color: #444;
 }
 
 .product-row div {
@@ -76,11 +60,6 @@ body {
   border-radius: 50%;
 }
 
-.price {
-  display: flex;
-  justify-content: center;
-}
-
 .actions {
   display: flex;
   justify-content: center;
@@ -89,7 +68,7 @@ body {
 .action-btn {
   padding: 5px 10px;
   margin: 0 5px;
-  background-color: #007bff; /* Azul */
+  background-color: #1260b3;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -97,5 +76,64 @@ body {
 }
 
 .action-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  background-color: #043f7e;
+}
+
+.edit-product-form {
+  background-color: #444;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.edit-product-form h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.edit-product-form input[type="text"],
+.edit-product-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.dark-input {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 170px;
+}
+
+.add-product-button {
+  padding: 5px 13px;
+  margin-left: 90px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-add-button {
+  padding: 8px 10px;
+  margin-left: 10px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-product-button:hover,
+.cancel-add-button:hover {
+  background-color: #6bcd7a;
+  color: #ffffff;
+}
+
+.add-buttons-container {
+  display: flex;
+  justify-content: flex-end;
 }
