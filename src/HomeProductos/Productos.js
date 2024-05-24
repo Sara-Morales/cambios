@@ -1,5 +1,5 @@
+// Productos.js
 import React, { useState } from 'react';
-import data from './data';
 import './Productos.css';
 
 const ProductList = ({
@@ -14,13 +14,13 @@ const ProductList = ({
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-CO', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3
     }).format(price);
   };
 
   const onAddProduct = (product) => {
-    const parsedPrice = product.price; // Asume que el precio ya es un número
+    const parsedPrice = product.price; 
     const newTotal = total + parsedPrice;
 
     setTotal(newTotal);
@@ -42,8 +42,8 @@ const ProductList = ({
   };
 
   const filteredProducts = selectedCategory === 'todos' ?
-    data :
-    data.filter(product => product.category === selectedCategory);
+    allProducts :
+    allProducts.filter(product => product.category === selectedCategory);
 
   return (
     <div className="Fondo">

@@ -5,11 +5,14 @@
   font-family: "Oswald", sans-serif;
   font-size: 10.5em;
   margin: 0;
+  width: 150px;
 }
 
 .nav {
   display: flex;
   align-items: center;
+  margin-left: -1850px;
+  width: 300px;
 }
 
 .nav-link{

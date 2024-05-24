@@ -1,0 +1,36 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #212429;
+    padding: 1rem;
+    color: white;
+  }
+  
+  .navbar-title {
+    font-size: 2rem;
+  }
+  
+  .navbar-options {
+    display: flex;
+    align-items: center;
+  }
+  
+  .admin-info {
+    margin-right: 1rem;
+  }
+  
+  .logout-button {
+    background-color: #074290;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 50px;
+  }
+  
+  .logout-button:hover {
+    background-color: #777;
+  }
+  

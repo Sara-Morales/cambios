@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './Home/Navbar';
 import ShoppingCartNavbar from './HomeProductos/ShoppingCartNavbar';
@@ -11,15 +11,24 @@ import Signup from './Cuenta_usuario/Signup/Signup';
 import ProductList from './HomeProductos/Productos';
 import Cart from './Cart/Cart';
 import Checkout from './Checkout/Checkout';
-import AdminPanel from './Admin/AdminPanel'; // Importar AdminPanel
+import AdminPanel from './Admin/AdminPanel';
+import AdminNavbar from './Admin/AdminNavbar'; 
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [countProducts, setCountProducts] = useState(0);
   const [total, setTotal] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      setIsAdmin(true);
+    }
+  }, []);
 
   const updateCartItem = (updatedItem) => {
-    const updatedProducts = allProducts.map(item => 
+    const updatedProducts = allProducts.map(item =>
       item.id === updatedItem.id ? updatedItem : item
     );
     setAllProducts(updatedProducts);
@@ -39,17 +48,31 @@ function App() {
     setTotal(totalPrice);
   };
 
+  const logout = () => {
+    localStorage.removeItem('adminToken');
+    setIsAdmin(false);
+  };
+
   return (
     <Router>
       <div>
         <Routes>
+          <Route
+            path="/admin"
+            element={
+              <>
+                <AdminNavbar /> {/* Renderiza el AdminNavbar */}
+                <AdminPanel products={allProducts} setProducts={setAllProducts} />
+              </>
+            }
+          />
           <Route
             path="/shopping"
             element={<ShoppingCartNavbar countProducts={countProducts} />}
           />
           <Route
             path="*"
-            element={<NavigationBar countProducts={countProducts} />}
+            element={<NavigationBar countProducts={countProducts} isAdmin={isAdmin} logout={logout} />}
           />
         </Routes>
         <Routes>
@@ -88,10 +111,6 @@ function App() {
           <Route 
             path="/checkout" 
             element={<Checkout cartItems={allProducts} />} 
-          />
-          <Route
-            path="/admin"
-            element={<AdminPanel products={allProducts} setProducts={setAllProducts} />}
           />
         </Routes>
       </div>
