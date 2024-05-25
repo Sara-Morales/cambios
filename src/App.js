@@ -12,10 +12,13 @@ import ProductList from './HomeProductos/Productos';
 import Cart from './Cart/Cart';
 import Checkout from './Checkout/Checkout';
 import AdminPanel from './Admin/AdminPanel';
-import AdminNavbar from './Admin/AdminNavbar'; 
+import AdminNavbar from './Admin/AdminNavbar';
 
 function App() {
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState(() => {
+    const storedProducts = localStorage.getItem('products');
+    return storedProducts ? JSON.parse(storedProducts) : [];
+  });
   const [countProducts, setCountProducts] = useState(0);
   const [total, setTotal] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -26,6 +29,10 @@ function App() {
       setIsAdmin(true);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(allProducts));
+  }, [allProducts]);
 
   const updateCartItem = (updatedItem) => {
     const updatedProducts = allProducts.map(item =>
@@ -61,7 +68,7 @@ function App() {
             path="/admin"
             element={
               <>
-                <AdminNavbar /> {/* Renderiza el AdminNavbar */}
+                <AdminNavbar />
                 <AdminPanel products={allProducts} setProducts={setAllProducts} />
               </>
             }
@@ -91,8 +98,8 @@ function App() {
             path="/shopping" 
             element={
               <ProductList 
-                allProducts={allProducts}
-                setAllProducts={setAllProducts}
+                products={allProducts}
+                setProducts={setAllProducts}
                 countProducts={countProducts}
                 setCountProducts={setCountProducts}
                 total={total}

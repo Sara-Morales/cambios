@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import '../Admin/AdminPanel.css';
 
@@ -16,15 +16,26 @@ const AdminPanel = ({ products, setProducts }) => {
 
   const [idCounter, setIdCounter] = useState(1);
 
+  useEffect(() => {
+    const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    setProducts(savedProducts);
+    if (savedProducts.length > 0) {
+      setIdCounter(savedProducts[savedProducts.length - 1].id + 1);
+    }
+  }, [setProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
+
   const handleEdit = (product) => {
     setEditedProduct({ ...product });
   };
 
   const handleSave = () => {
     if (validateProduct(editedProduct)) {
-      setProducts(
-        products.map((p) => (p.id === editedProduct.id ? editedProduct : p))
-      );
+      const updatedProducts = products.map((p) => (p.id === editedProduct.id ? editedProduct : p));
+      setProducts(updatedProducts);
       setEditedProduct(null);
     } else {
       alert("Por favor, completa todos los campos correctamente.");
@@ -33,7 +44,8 @@ const AdminPanel = ({ products, setProducts }) => {
 
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-      setProducts(products.filter((p) => p.id !== id));
+      const updatedProducts = products.filter((p) => p.id !== id);
+      setProducts(updatedProducts);
     }
   };
 
@@ -76,7 +88,6 @@ const AdminPanel = ({ products, setProducts }) => {
       setNewProduct({ ...newProduct, [name]: value });
     }
   };
-  
 
   const validateProduct = (product) => {
     const { nameProduct, price, category, stock } = product;
@@ -188,64 +199,62 @@ const AdminPanel = ({ products, setProducts }) => {
                   value={editedProduct.category}
                   onChange={(e) => handleProductChange(e, "category")}
                   className ="dark-input"
-                  />
-                ) : (
-                  product.category
-                )}
-              </div>
-              <div>
-                {editedProduct && editedProduct.id === product.id ? (
-                  <input
-                    type="number"
-                    value={editedProduct.price}
-                    onChange={(e) => handleProductChange(e, "price")}
-                    className="dark-input"
-                  />
-                ) : (
-                  `$${product.price}`
-                )}
-              </div>
-              <div>
-                {editedProduct && editedProduct.id === product.id ? (
-                  <input
-                    type="number"
-                    value={editedProduct.stock}
-                    onChange={(e) =>
-                      handleProductChange(e, "stock")}
-                    className="dark-input"
-                  />
-                ) : (
-                  product.stock
-                )}
-              </div>
-              <div className="actions">
-                {editedProduct && editedProduct.id === product.id ? (
-                  <button className="action-btn" onClick={handleSave}>
-                    Guardar
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      className="action-btn"
-                      onClick={() => handleEdit(product)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="action-btn"
-                      onClick={() => handleDelete(product.id)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </>
-                )}
-              </div>
+                />
+              ) : (
+                product.category
+              )}
             </div>
-          ))}
-        </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="number"
+                  value={editedProduct.price}
+                  onChange={(e) => handleProductChange(e, "price")}
+                  className="dark-input"
+                />
+              ) : (
+                `$${product.price}`
+              )}
+            </div>
+            <div>
+              {editedProduct && editedProduct.id === product.id ? (
+                <input
+                  type="number"
+                  value={editedProduct.stock}
+                  onChange={(e) => handleProductChange(e, "stock")}
+                  className="dark-input"
+                />
+              ) : (
+                product.stock
+              )}
+            </div>
+            <div className="actions">
+              {editedProduct && editedProduct.id === product.id ? (
+                <button className="action-btn" onClick={handleSave}>
+                  Guardar
+                </button>
+              ) : (
+                <>
+                  <button
+                    className="action-btn"
+                    onClick={() => handleEdit(product)}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className="action-btn"
+                    onClick={() => handleDelete(product.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
-    );
-  };
-  
-  export default AdminPanel;
-  
+    </div>
+  );
+};
+
+export default AdminPanel;
